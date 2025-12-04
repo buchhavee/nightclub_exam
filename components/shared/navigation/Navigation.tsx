@@ -13,7 +13,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="relative lg:h-[124px] h-[107px] bg-[#00000090] border-2 border-primary">
+    <nav className="sticky top-0 lg:h-[124px] h-[107px] bg-[#000000e1] border-2 border-primary">
       <div className="absolute -top-0.5 -left-0.5 w-0 h-0 border-t-30 border-t-primary border-r-30 border-r-transparent" />
       <div className="flex items-center justify-between mx-auto px-8 max-w-350 h-full gap-16">
         <Link href="/" className="relative shrink-0">
@@ -62,7 +62,7 @@ const Navigation = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`lg:hidden absolute top-[105px] left-0 right-0 bg-[#00000090] border-2 border-t-0 border-primary transition-all duration-300 overflow-hidden ${
+        className={`lg:hidden absolute top-[105px] left-0 right-0 bg-[#000000e1] border-2 border-t-0 border-primary transition-all duration-300 overflow-hidden ${
           isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 border-0"
         }`}
       >
