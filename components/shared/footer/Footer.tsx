@@ -10,7 +10,7 @@ const Footer = () => {
     <footer className="relative w-full h-[800px] bg-black">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 pointer-events-none">
-        <Image src="/assets/bg/footerbg.jpg" alt="" fill className="object-cover" />
+        <Image src="/assets/bg/footerbg.jpg" alt="" fill className="object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-bg-overlay-dark" />
       </div>
 
