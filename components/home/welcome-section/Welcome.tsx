@@ -8,12 +8,12 @@ import { Martini } from "lucide-react";
 const easeOut = [0.16, 1, 0.3, 1] as const;
 
 const cornerVariants = {
-  rest: { opacity: 0, y: -20, x: -20 },
+  rest: { opacity: 0, y: -50, x: -50 },
   hover: { opacity: 1, y: 0, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
 const cornerVariants2 = {
-  rest: { opacity: 0, y: 20, x: 20 },
+  rest: { opacity: 0, y: 50, x: 50 },
   hover: { opacity: 1, y: 0, x: 0, transition: { duration: 1, ease: easeOut } },
 };
 
@@ -87,13 +87,22 @@ const Welcome = () => {
       <Suspense
         fallback={
           <div className="mx-auto w-24 h-24 flex items-center justify-center my-24">
-            <Image src="/assets/loader/madbars.gif" alt="Loading..." width={100} height={100} />
+            <Image
+              src="/assets/loader/madbars.gif"
+              alt="Loading..."
+              width={100}
+              height={100}
+              unoptimized
+            />
           </div>
         }
       >
         <div className="grid lg:grid-cols-3 grid-cols-1 lg:max-w-full max-w-[459px] my-24 gap-8 mx-auto">
           {CARDS.map((card, index) => (
-            <div key={card.id} className="grid grid-cols-1 grid-rows-1 w-full h-full relative">
+            <div
+              key={card.id}
+              className="grid grid-cols-1 grid-rows-1 w-full h-full relative overflow-hidden"
+            >
               <Image
                 src={card.image}
                 alt="Welcome Image"
