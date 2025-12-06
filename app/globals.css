@@ -57,3 +57,13 @@ body {
   --text-xl: var(--font-size-xl);
   --text-2xl: var(--font-size-2xl);
 }
+
+:root {
+  --swiper-theme-color: var(--color-primary) !important;
+  --swiper-pagination-bullet-inactive-color: var(--color-white) !important;
+  --swiper-pagination-bullet-inactive-opacity: 1 !important;
+  --swiper-pagination-bullet-size: 20px !important;
+  --swiper-pagination-bullet-horizontal-gap: 12px !important;
+  --swiper-pagination-bullet-border-radius: 0 !important;
+  --swiper-pagination-bottom: 0 !important;
+}
