@@ -1,0 +1,37 @@
+"use cache";
+import Events from "../events-of-month/Events";
+import Image from "next/image";
+
+const FetchEvents = async () => {
+  const url = "http://localhost:4000/events";
+  const data = await fetch(url);
+  const events = await data.json();
+  return events;
+};
+
+const EventsContainer = async () => {
+  const events = await FetchEvents();
+  return (
+    <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
+      <div className="absolute inset-0 pointer-events-none">
+        <Image
+          src="/assets/bg/slider_bg_overlay.png"
+          alt=""
+          fill
+          className="object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+      <div className="mx-auto max-w-5xl mb-24 relative">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-medium uppercase text-white mb-4">Events of the Month</h2>
+        </div>
+        <div className="h-0.5 bg-linear-to-r from-transparent via-primary to-transparent mt-2"></div>
+      </div>
+      <Events events={events} />
+    </section>
+  );
+};
+
+export default EventsContainer;

@@ -14,11 +14,12 @@ const Hero = () => {
             width={100}
             height={100}
             className="object-contain"
+            unoptimized
           />
         </div>
       }
     >
-      <section className="w-full h-dvh flex items-center justify-center">
+      <section className="w-full h-dvh flex items-center justify-center -mb-[107px] lg:-mb-[124px] relative overflow-hidden snap-y">
         <Suspense>
           <HeroBackground />
         </Suspense>
