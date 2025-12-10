@@ -38,7 +38,7 @@ const Events = ({ events }: EventsProps) => {
         </div>
       }
     >
-      <section className="px-4 max-w-[708px] lg:max-w-full mx-auto">
+      <section className="px-4 max-w-[708px] lg:max-w-[1440px] mx-auto">
         <Swiper
           modules={[Pagination, Autoplay]}
           spaceBetween={24}
