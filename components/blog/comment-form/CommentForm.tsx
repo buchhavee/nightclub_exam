@@ -1,16 +1,11 @@
 "use client";
 
 import { useActionState, useEffect } from "react";
-import { submitForm } from "@/app/action/action";
+import { submitComment } from "@/app/action/action";
 import Button from "@/components/shared/button/Button";
 
-interface CommentFormProps {
-  id: number;
-  onSuccess?: () => void;
-}
-
-const CommentForm = ({ id, onSuccess }: CommentFormProps) => {
-  const [state, postComment] = useActionState(submitForm, { error: {} });
+const CommentForm = ({ id, onSuccess }) => {
+  const [state, postComment] = useActionState(submitComment, { error: {} });
   useEffect(() => {
     if (state?.success && onSuccess) {
       onSuccess();
@@ -19,18 +14,13 @@ const CommentForm = ({ id, onSuccess }: CommentFormProps) => {
   });
   console.log("State", state);
   return (
-    <section>
-      {state.success && <p className="pb-6 text-primary">Comment {state.tableId} submitted successfully!</p>}
-      {state.success === false && <p className="pb-6">Something went wrong!</p>}
-
-      <form action={postComment} className="grid grid-cols-2 gap-4">
-        <input type="hidden" name="blogId" value={id}></input>
-        <input type="text" name="yourName" placeholder="Your Name" className="border px-3 py-6"></input>
-        <input type="email" name="yourEmail" placeholder="Your Email" className="border px-3 py-6"></input>
-        <textarea name="yourComment" rows={10} placeholder="Your Comment" className="border px-3 py-5 col-span-2"></textarea>
-        <Button isLink={false} text="Submit" stylePlace="place-self-end col-start-2"></Button>
-      </form>
-    </section>
+    <form action={postComment} className="grid grid-cols-2 gap-4">
+      <input type="hidden" name="blogId" value={id}></input>
+      <input type="text" name="yourName" placeholder="Your Name" className="border px-3 py-6"></input>
+      <input type="email" name="yourEmail" placeholder="Your Email" className="border px-3 py-6"></input>
+      <textarea name="yourComment" rows={10} placeholder="Your Comment" className="border px-3 py-5 col-span-2"></textarea>
+      <Button isLink={false} text="Submit" stylePlace="place-self-end col-start-2"></Button>
+    </form>
   );
 };
 
