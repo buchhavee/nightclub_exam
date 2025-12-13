@@ -1,21 +1,19 @@
-import TableGrid from "@/components/booking/table-grid/TableGrid";
-import BookingForm from "@/components/booking/booking-form/BookingForm";
+import ContactForm from "@/components/contact/contact-form/ContactForm";
 import { Metadata } from "next";
 import PageBanner from "@/components/shared/Page-banner/PageBanner";
 
 export const metadata: Metadata = {
-  title: "Book Table",
+  title: "Contact Us",
   description: "Experience the Ultimate Nightlife",
 };
 
-export default function Booking() {
+export default function Contact() {
   return (
     <div>
-      <PageBanner title="Book a Table" wrap={true} />
+      <PageBanner title="Contact Us" wrap={true} />
       <div className="flex min-h-screen items-center justify-center">
         <main className="w-full max-w-[1440px] flex-col items-center justify-betweensm:items-start">
-          <TableGrid></TableGrid>
-          <BookingForm></BookingForm>
+          <ContactForm />
         </main>
       </div>
     </div>
