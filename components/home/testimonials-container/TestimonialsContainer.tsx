@@ -1,16 +1,38 @@
-"use cache";
+"use client";
+
 import Testimonials from "../testimonials/Testimonials";
 import Image from "next/image";
+import useSWR from "swr";
 
-const FetchTestimonials = async () => {
-  const url = "http://localhost:4000/Testimonials";
-  const data = await fetch(url);
-  const events = await data.json();
-  return events;
-};
+// SWR fetcher function
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const TestimonialsContainer = async () => {
-  const testimonials = await FetchTestimonials();
+interface Testimonial {
+  id: number;
+  name: string;
+  content: string;
+  asset: {
+    url: string;
+  };
+}
+
+const TestimonialsContainer = () => {
+  const { data: testimonials, error, isLoading } = useSWR<Testimonial[]>("/api/testimonials", fetcher);
+
+  // Error
+  if (error || !testimonials || !Array.isArray(testimonials) || testimonials.length === 0) {
+    return (
+      <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
+        <div className="absolute inset-0 pointer-events-none">
+          <Image src="/assets/bg/footerbg.jpg" alt="" fill className="object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-black/80" />
+        </div>
+        <p className="text-center my-10 text-white">Unable to load testimonials at this time.</p>
+      </section>
+    );
+  }
+
+  // Testimonials
   return (
     <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
       <div className="absolute inset-0 pointer-events-none">

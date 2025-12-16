@@ -1,27 +1,60 @@
-"use cache";
+"use client";
+
 import Events from "../events-of-month/Events";
 import Image from "next/image";
 import Title from "@/components/shared/Title/Title";
+import useSWR from "swr";
 
-const FetchEvents = async () => {
-  const url = "http://localhost:4000/events";
-  const data = await fetch(url);
-  const events = await data.json();
-  return events;
-};
+// SWR fetcher function
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const EventsContainer = async () => {
-  const events = await FetchEvents();
+interface Event {
+  id: number;
+  date: string;
+  title: string;
+  description: string;
+  location: string;
+  asset: {
+    url: string;
+  };
+}
+
+const EventsContainer = () => {
+  const { data: events, error } = useSWR<Event[]>("/api/events", fetcher);
+
+  // Error
+  if (error || !events || !Array.isArray(events)) {
+    return (
+      <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
+        <div className="absolute inset-0 pointer-events-none">
+          <Image src="/assets/bg/slider_bg_overlay.png" alt="" fill className="object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <Title title="Events of the Month" wrap={true} />
+        <p className="text-center my-10 text-white">Unable to load events at this time. Please try again later.</p>
+      </section>
+    );
+  }
+
+  // Ingen events
+  if (events.length === 0) {
+    return (
+      <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
+        <div className="absolute inset-0 pointer-events-none">
+          <Image src="/assets/bg/slider_bg_overlay.png" alt="" fill className="object-cover" loading="lazy" />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+        <Title title="Events of the Month" wrap={true} />
+        <p className="text-center my-10 text-white">No events available.</p>
+      </section>
+    );
+  }
+
+  // Events
   return (
     <section className="my-24 relative w-full bg-cover bg-center bg-no-repeat py-16 px-4">
       <div className="absolute inset-0 pointer-events-none">
-        <Image
-          src="/assets/bg/slider_bg_overlay.png"
-          alt=""
-          fill
-          className="object-cover"
-          loading="lazy"
-        />
+        <Image src="/assets/bg/slider_bg_overlay.png" alt="" fill className="object-cover" loading="lazy" />
         <div className="absolute inset-0 bg-black/50" />
       </div>
       <Title title="Events of the Month" wrap={true} />
